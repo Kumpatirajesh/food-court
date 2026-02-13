@@ -1,0 +1,2623 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Hub v38 - Delicious Meals Delivered</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Enhanced Typography */
+        .heading-primary {
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.025em;
+        }
+        .heading-secondary {
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.015em;
+        }
+        .text-body-primary {
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+        .text-body-secondary {
+            font-weight: 300;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #9ca3af;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.6); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+        }
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .category-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+        }
+        .price-tag {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
+            font-size: 0.875rem;
+        }
+        .rating-stars {
+            color: #fbbf24;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+        
+        /* Typography */
+        .heading-bold {
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+        }
+        .text-body {
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Enhanced Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            font-weight: 600;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.15), 0 2px 8px rgba(34, 197, 94, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.25), 0 4px 12px rgba(34, 197, 94, 0.15);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            font-weight: 600;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.15), 0 2px 8px rgba(249, 115, 22, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.25), 0 4px 12px rgba(249, 115, 22, 0.15);
+        }
+        
+        .btn-white {
+            background: white;
+            color: #22c55e;
+            font-weight: 600;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 2px solid #22c55e;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: #22c55e;
+            color: white;
+        }
+        
+        .btn-rounded {
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-rounded:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Enhanced Spacing & Layout */
+        .section-spacing {
+            margin-bottom: 3rem;
+        }
+        
+        .card-spacing {
+            margin-bottom: 2rem;
+        }
+        
+        .content-spacing {
+            padding: 1.5rem;
+        }
+        
+        .section-padding {
+            padding: 2rem 0;
+        }
+        
+        .card-padding {
+            padding: 1.5rem;
+        }
+        
+        .mobile-spacing {
+            padding: 1rem 1.5rem;
+        }
+        
+        .section-gap {
+            gap: 2rem;
+        }
+        
+        /* Mobile-specific styles */
+        .mobile-container {
+            padding-bottom: 80px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-top: 1px solid #22c55e;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 8px;
+            text-decoration: none;
+            color: #64748b;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .nav-item.active {
+            color: #22c55e;
+        }
+        
+        .nav-item:hover {
+            color: #22c55e;
+            transform: translateY(-3px);
+        }
+        
+        .nav-badge {
+            position: absolute;
+            top: 2px;
+            right: 8px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .mobile-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, #ffffff 0%, #fef7ed 100%);
+            border-bottom: 1px solid #fed7aa;
+            backdrop-filter: blur(10px);
+        }
+        
+        .version-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .new-feature-badge {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 8px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="bg-gradient-to-br from-green-50 to-orange-50 min-h-screen"><!-- Login/Register Page -->
+  <div id="authPage" class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"><!-- Animated Background -->
+   <div class="absolute inset-0 bg-gradient-to-br from-green-400 via-green-500 to-orange-400"></div>
+   <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full float-animation"></div>
+    <div class="absolute top-32 right-20 w-16 h-16 bg-orange-300 rounded-full float-animation" style="animation-delay: 0.5s;"></div>
+    <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-green-300 rounded-full float-animation" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-32 right-1/3 w-24 h-24 bg-white rounded-full float-animation" style="animation-delay: 1.5s;"></div>
+   </div>
+   <div class="category-card rounded-3xl shadow-2xl p-8 w-full max-w-sm fade-in relative z-10 hover-lift">
+    <div class="text-center mb-8 section-spacing">
+     <div class="inline-block p-4 bg-gradient-to-r from-green-500 to-orange-500 rounded-full mb-4 pulse-glow"><span class="text-4xl">🍽️</span>
+     </div>
+     <h1 class="text-4xl heading-bold gradient-text mb-3">Food Hub</h1>
+     <p class="text-gray-700 text-body text-base">Delicious meals delivered to your door</p>
+     <div class="flex justify-center space-x-3 mt-4"><span class="text-2xl">⭐</span> <span class="text-2xl">🚚</span> <span class="text-2xl">🔥</span>
+     </div>
+    </div><!-- Login Form -->
+    <div id="loginForm">
+     <h2 class="text-2xl heading-bold text-gray-800 mb-6 text-center">Welcome Back</h2>
+     <form class="space-y-5" onsubmit="handleLogin(event)">
+      <div class="relative"><label class="block text-gray-700 font-semibold mb-2 text-base">📧 Email</label> <input type="email" class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 bg-white text-base" placeholder="Enter your email" required>
+      </div>
+      <div class="relative"><label class="block text-gray-700 font-semibold mb-2 text-base">🔒 Password</label> <input type="password" class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 bg-white text-base" placeholder="Enter your password" required>
+      </div><button type="submit" class="w-full btn-primary py-4 text-lg mt-6"> 🚀 Login to Food Hub </button>
+     </form>
+     <p class="text-center mt-6 text-gray-600 text-body">Don't have an account? <button onclick="showRegister()" class="text-green-600 hover:underline font-semibold">Sign up</button></p>
+    </div><!-- Register Form -->
+    <div id="registerForm" class="hidden">
+     <h2 class="text-2xl heading-bold text-gray-800 mb-6 text-center">Create Account</h2>
+     <form class="space-y-5" onsubmit="handleRegister(event)">
+      <div class="relative"><label class="block text-gray-700 font-semibold mb-2 text-base">👤 Full Name</label> <input type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 bg-white text-base" placeholder="Enter your full name" required>
+      </div>
+      <div class="relative"><label class="block text-gray-700 font-semibold mb-2 text-base">📧 Email</label> <input type="email" class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 bg-white text-base" placeholder="Enter your email" required>
+      </div>
+      <div class="relative"><label class="block text-gray-700 font-semibold mb-2 text-base">🔒 Password</label> <input type="password" class="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 bg-white text-base" placeholder="Create a password" required>
+      </div><button type="submit" class="w-full btn-primary py-4 text-lg mt-6"> ✨ Create Account </button>
+     </form>
+     <p class="text-center mt-6 text-gray-600 text-body">Already have an account? <button onclick="showLogin()" class="text-green-600 hover:underline font-semibold">Sign in</button></p>
+    </div>
+   </div>
+  </div><!-- Main Page -->
+  <div id="mainPage" class="hidden min-h-screen mobile-container"><!-- Mobile Header -->
+   <header class="mobile-header">
+    <div class="px-6 py-4 flex justify-between items-center">
+     <div class="flex items-center space-x-3">
+      <div class="p-2 bg-gradient-to-r from-green-500 to-orange-500 rounded-full"><span class="text-xl">🍽️</span>
+      </div>
+      <div>
+       <h1 class="text-2xl heading-primary gradient-text">Food Hub</h1>
+      </div>
+     </div>
+     <div class="flex items-center space-x-2">
+      <div class="text-sm text-gray-600 font-semibold">
+       Food Hub
+      </div>
+     </div>
+    </div>
+   </header><!-- Categories -->
+   <div id="categoriesPage" class="mobile-spacing section-padding relative"><!-- Search Bar -->
+    <div class="mb-8">
+     <div class="relative"><input type="text" id="categorySearchInput" placeholder="Search for dishes, categories..." class="w-full px-4 py-4 pl-12 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300 bg-white text-base shadow-lg" oninput="performCategorySearch()">
+      <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"><span class="text-xl">🔍</span>
+      </div><button onclick="clearCategorySearch()" id="clearSearchBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition duration-300 hidden btn-rounded"> <span class="text-lg">✕</span> </button>
+     </div>
+    </div>
+    <div class="text-center section-spacing">
+     <h2 class="text-4xl heading-primary gradient-text mb-6">Choose Your Category</h2>
+     <p class="text-body-primary text-lg mb-8">Discover amazing flavors crafted just for you</p>
+     <div class="flex justify-center space-x-6 mt-8"><span class="text-4xl float-animation">🍕</span> <span class="text-4xl float-animation" style="animation-delay: 0.5s;">🍔</span> <span class="text-4xl float-animation" style="animation-delay: 1s;">🍝</span>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 section-gap">
+     <div onclick="showCategory('veg')" class="category-card rounded-3xl shadow-xl overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing">
+      <div class="absolute top-4 right-4 z-10">
+       <div class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+        🌱 Pure Veg
+       </div>
+      </div>
+      <div class="relative h-56 overflow-hidden"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&amp;h=300&amp;fit=crop" alt="Vegetarian Food" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="w-full h-full bg-gradient-to-br from-green-100 to-green-200 items-center justify-center hidden">
+        <div class="text-8xl">
+         🥬
+        </div>
+       </div>
+       <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 via-green-900/20 to-transparent"></div>
+       <div class="absolute bottom-6 left-6 text-white">
+        <h3 class="text-3xl heading-primary mb-3 drop-shadow-lg">Vegetarian</h3>
+        <p class="text-green-100 text-base text-body-primary">Fresh and healthy options</p>
+        <div class="flex items-center mt-4 space-x-2"><span class="text-green-100 text-sm heading-secondary">Fresh &amp; Healthy</span>
+        </div>
+       </div>
+      </div>
+      <div class="card-padding bg-gradient-to-r from-green-50 to-emerald-50">
+       <div class="flex items-center justify-between">
+        <div><span class="text-green-700 heading-secondary text-lg">🌱 Pure Veg Delights</span>
+         <p class="text-green-600 text-body-primary text-sm mt-2">150+ Options</p>
+        </div>
+        <div class="bg-green-500 text-white p-3 rounded-full transform hover:rotate-12 transition duration-300 btn-rounded"><span class="text-lg">→</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div onclick="showCategory('nonveg')" class="category-card rounded-3xl shadow-xl overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing">
+      <div class="absolute top-4 right-4 z-10">
+       <div class="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+        🍖 Premium
+       </div>
+      </div>
+      <div class="relative h-56 overflow-hidden"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&amp;h=300&amp;fit=crop" alt="Non-Vegetarian Food" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 items-center justify-center hidden">
+        <div class="text-8xl">
+         🍖
+        </div>
+       </div>
+       <div class="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-orange-900/20 to-transparent"></div>
+       <div class="absolute bottom-6 left-6 text-white">
+        <h3 class="text-3xl heading-primary mb-3 drop-shadow-lg">Non-Vegetarian</h3>
+        <p class="text-orange-100 text-base text-body-primary">Delicious meat &amp; seafood</p>
+        <div class="flex items-center mt-4 space-x-2"><span class="text-orange-100 text-sm heading-secondary">Premium Quality</span>
+        </div>
+       </div>
+      </div>
+      <div class="card-padding bg-gradient-to-r from-orange-50 to-red-50">
+       <div class="flex items-center justify-between">
+        <div><span class="text-orange-700 heading-secondary text-lg">🍗 Premium Meat</span>
+         <p class="text-orange-600 text-body-primary text-sm mt-2">120+ Dishes</p>
+        </div>
+        <div class="bg-orange-500 text-white p-3 rounded-full transform hover:rotate-12 transition duration-300 btn-rounded"><span class="text-lg">→</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div onclick="showSubCategory('cooldrinks')" class="category-card rounded-3xl shadow-xl overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing">
+      <div class="absolute top-4 right-4 z-10">
+       <div class="bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+        🥤 Refreshing
+       </div>
+      </div>
+      <div class="relative h-56 overflow-hidden"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&amp;h=300&amp;fit=crop" alt="Cool Drinks" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-200 items-center justify-center hidden">
+        <div class="text-8xl">
+         🥤
+        </div>
+       </div>
+       <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/80 via-cyan-900/20 to-transparent"></div>
+       <div class="absolute bottom-6 left-6 text-white">
+        <h3 class="text-3xl heading-primary mb-3 drop-shadow-lg">Cool Drinks</h3>
+        <p class="text-cyan-100 text-base text-body-primary">Refreshing beverages &amp; smoothies</p>
+        <div class="flex items-center mt-4 space-x-2"><span class="text-cyan-100 text-sm heading-secondary">Refreshing &amp; Cold</span>
+        </div>
+       </div>
+      </div>
+      <div class="card-padding bg-gradient-to-r from-cyan-50 to-blue-50">
+       <div class="flex items-center justify-between">
+        <div><span class="text-cyan-700 heading-secondary text-lg">🥤 Fresh Beverages</span>
+         <p class="text-cyan-600 text-body-primary text-sm mt-2">35+ Drinks</p>
+        </div>
+        <div class="bg-cyan-500 text-white p-3 rounded-full transform hover:rotate-12 transition duration-300 btn-rounded"><span class="text-lg">→</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Attractive Footer -->
+    <div class="mt-8 mb-4"><!-- Special Offers Banner -->
+     <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🎉 Special Offers!</h3>
+        <p class="text-sm opacity-90">Get 20% off on orders above ₹299</p>
+       </div>
+       <div class="text-3xl">
+        🍽️
+       </div>
+      </div>
+     </div><!-- Quick Stats -->
+     <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⚡
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fast Delivery
+       </div>
+       <div class="text-xs text-gray-600">
+        25-30 mins
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⭐
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Top Rated
+       </div>
+       <div class="text-xs text-gray-600">
+        4.8/5 Rating
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔥
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fresh Food
+       </div>
+       <div class="text-xs text-gray-600">
+        Made to order
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🌟 Discover amazing flavors from around the world</p>
+      <p class="text-gray-400 text-xs">Fresh ingredients • Expert chefs • Delivered with love</p>
+     </div>
+    </div>
+   </div><!-- Vegetarian Category Page -->
+   <div id="vegCategoryPage" class="hidden mobile-spacing section-padding">
+    <div class="flex items-center mb-6"><button onclick="showCategories()" class="p-3 bg-gray-100 rounded-full mr-4 hover:bg-gray-200 transition duration-300 btn-rounded"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl heading-primary gradient-text">🌱 Vegetarian Menu</h2>
+    </div>
+    <div class="grid grid-cols-2 section-gap">
+     <div onclick="showSubCategory('vegetables')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&amp;h=150&amp;fit=crop" alt="Vegetables" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-green-100 to-green-200 items-center justify-center hidden"><span class="text-3xl">🥕</span>
+       </div>
+      </div>
+      <div class="card-padding">
+       <h3 class="heading-secondary text-green-700">Vegetables</h3>
+       <p class="text-xs text-body-primary text-green-600 mt-1">Fresh &amp; Healthy</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('paneer')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&amp;h=150&amp;fit=crop" alt="Paneer" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-yellow-100 to-yellow-200 items-center justify-center hidden"><span class="text-3xl">🧀</span>
+       </div>
+      </div>
+      <div class="card-padding">
+       <h3 class="heading-secondary text-yellow-700">Paneer</h3>
+       <p class="text-xs text-body-primary text-yellow-600 mt-1">Rich &amp; Creamy</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('pizza')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&amp;h=150&amp;fit=crop" alt="Pizza" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-red-100 to-red-200 items-center justify-center hidden"><span class="text-3xl">🍕</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-red-700">Pizza</h3>
+       <p class="text-xs text-red-600">Cheesy Delights</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('burgers')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&amp;h=150&amp;fit=crop" alt="Burgers" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-orange-100 to-orange-200 items-center justify-center hidden"><span class="text-3xl">🍔</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-orange-700">Burgers</h3>
+       <p class="text-xs text-orange-600">Juicy &amp; Fresh</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('pasta')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=200&amp;h=150&amp;fit=crop" alt="Pasta" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-purple-100 to-purple-200 items-center justify-center hidden"><span class="text-3xl">🍝</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-purple-700">Pasta</h3>
+       <p class="text-xs text-purple-600">Italian Style</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('salads')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&amp;h=150&amp;fit=crop" alt="Salads" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-green-100 to-emerald-200 items-center justify-center hidden"><span class="text-3xl">🥗</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-emerald-700">Salads</h3>
+       <p class="text-xs text-emerald-600">Light &amp; Fresh</p>
+      </div>
+     </div>
+    </div><!-- Attractive Footer -->
+    <div class="mt-8 mb-4"><!-- Special Offers Banner -->
+     <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🎉 Special Offers!</h3>
+        <p class="text-sm opacity-90">Get 20% off on orders above ₹299</p>
+       </div>
+       <div class="text-3xl">
+        🍽️
+       </div>
+      </div>
+     </div><!-- Quick Stats -->
+     <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⚡
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fast Delivery
+       </div>
+       <div class="text-xs text-gray-600">
+        25-30 mins
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⭐
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Top Rated
+       </div>
+       <div class="text-xs text-gray-600">
+        4.8/5 Rating
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔥
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fresh Food
+       </div>
+       <div class="text-xs text-gray-600">
+        Made to order
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🌟 Discover amazing flavors from around the world</p>
+      <p class="text-gray-400 text-xs">Fresh ingredients • Expert chefs • Delivered with love</p>
+     </div>
+    </div>
+   </div><!-- Non-Vegetarian Category Page -->
+   <div id="nonvegCategoryPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="showCategories()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl font-bold gradient-text">🍖 Non-Vegetarian Menu</h2>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+     <div onclick="showSubCategory('chicken')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=200&amp;h=150&amp;fit=crop" alt="Chicken" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-red-100 to-red-200 items-center justify-center hidden"><span class="text-3xl">🍗</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-red-700">Chicken</h3>
+       <p class="text-xs text-red-600">Tender &amp; Juicy</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('mutton')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&amp;h=150&amp;fit=crop" alt="Mutton" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-orange-100 to-orange-200 items-center justify-center hidden"><span class="text-3xl">🥩</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-orange-700">Mutton</h3>
+       <p class="text-xs text-orange-600">Rich &amp; Flavorful</p>
+      </div>
+     </div>
+     <div onclick="showSubCategory('fish')" class="category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift">
+      <div class="h-24 overflow-hidden"><img src="https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=200&amp;h=150&amp;fit=crop" alt="Fish" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="h-24 bg-gradient-to-br from-blue-100 to-cyan-200 items-center justify-center hidden"><span class="text-3xl">🐟</span>
+       </div>
+      </div>
+      <div class="p-3">
+       <h3 class="font-bold text-blue-700">Fish</h3>
+       <p class="text-xs text-blue-600">Fresh &amp; Healthy</p>
+      </div>
+     </div>
+    </div><!-- Attractive Footer -->
+    <div class="mt-8 mb-4"><!-- Special Offers Banner -->
+     <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🎉 Special Offers!</h3>
+        <p class="text-sm opacity-90">Get 20% off on orders above ₹299</p>
+       </div>
+       <div class="text-3xl">
+        🍽️
+       </div>
+      </div>
+     </div><!-- Quick Stats -->
+     <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⚡
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fast Delivery
+       </div>
+       <div class="text-xs text-gray-600">
+        25-30 mins
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⭐
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Top Rated
+       </div>
+       <div class="text-xs text-gray-600">
+        4.8/5 Rating
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔥
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fresh Food
+       </div>
+       <div class="text-xs text-gray-600">
+        Made to order
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🌟 Discover amazing flavors from around the world</p>
+      <p class="text-gray-400 text-xs">Fresh ingredients • Expert chefs • Delivered with love</p>
+     </div>
+    </div>
+   </div><!-- Sub Category Items Page -->
+   <div id="itemsPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="goBackToCategory()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 id="itemsPageTitle" class="text-2xl font-bold gradient-text">Items</h2>
+    </div>
+    <div id="itemsList" class="space-y-4"><!-- Items will be populated dynamically -->
+    </div>
+   </div><!-- Item Details Page -->
+   <div id="itemDetailsPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="goBackToItems()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl font-bold gradient-text">Item Details</h2>
+    </div>
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+     <div class="h-48 overflow-hidden"><img id="itemImage" src="" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="h-48 bg-gradient-to-br from-orange-100 to-red-100 items-center justify-center hidden"><span id="itemEmoji" class="text-8xl">🍕</span>
+      </div>
+     </div>
+     <div class="p-6">
+      <h3 id="itemName" class="text-2xl font-bold text-gray-800 mb-2">Item Name</h3>
+      <p id="itemDescription" class="text-gray-600 mb-4">Delicious item description goes here.</p>
+      <div class="flex items-center justify-between mb-4">
+       <div class="price-tag">
+        ₹<span id="itemPrice">199</span>
+       </div>
+       <div class="flex items-center space-x-1"><span class="text-sm text-gray-600 font-semibold">Fresh &amp; Delicious</span>
+       </div>
+      </div>
+      <div class="space-y-3"><button onclick="addToCartFromDetails()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition duration-300"> 🛒 Add to Cart </button> <button onclick="orderNow()" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-3 rounded-xl font-bold hover:from-green-600 hover:to-emerald-600 transition duration-300"> 🚀 Order Now </button>
+      </div>
+     </div>
+    </div><!-- Attractive Footer -->
+    <div class="mt-8 mb-4"><!-- Special Offers Banner -->
+     <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🎉 Special Offers!</h3>
+        <p class="text-sm opacity-90">Get 20% off on orders above ₹299</p>
+       </div>
+       <div class="text-3xl">
+        🍽️
+       </div>
+      </div>
+     </div><!-- Quick Stats -->
+     <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⚡
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fast Delivery
+       </div>
+       <div class="text-xs text-gray-600">
+        25-30 mins
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⭐
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Top Rated
+       </div>
+       <div class="text-xs text-gray-600">
+        4.8/5 Rating
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔥
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fresh Food
+       </div>
+       <div class="text-xs text-gray-600">
+        Made to order
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🌟 Discover amazing flavors from around the world</p>
+      <p class="text-gray-400 text-xs">Fresh ingredients • Expert chefs • Delivered with love</p>
+     </div>
+    </div>
+   </div><!-- Cart Page -->
+   <div id="cartPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="showCategories()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl font-bold gradient-text">🛒 My Cart</h2>
+    </div>
+    <div id="cartItems" class="space-y-4 mb-6"><!-- Cart items will be populated dynamically -->
+    </div>
+    <div id="cartEmpty" class="text-center py-12"><span class="text-6xl">🛒</span>
+     <h3 class="text-xl font-bold text-gray-600 mt-4">Your cart is empty</h3>
+     <p class="text-gray-500 mb-6">Add some delicious items to get started!</p><button onclick="showCategories()" class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition duration-300"> 🍽️ Browse Menu </button>
+    </div>
+    <div id="cartSummary" class="hidden bg-white rounded-xl shadow-lg p-4">
+     <div class="flex justify-between items-center mb-4"><span class="text-lg font-bold">Total:</span> <span id="cartTotal" class="text-2xl font-bold text-orange-600">₹0</span>
+     </div><button onclick="proceedToPayment()" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-3 rounded-xl font-bold hover:from-green-600 hover:to-emerald-600 transition duration-300"> 💳 Proceed to Payment </button>
+    </div><!-- Cart Footer -->
+    <div class="mt-8 mb-4"><!-- Delivery Info Banner -->
+     <div class="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🚚 Free Delivery!</h3>
+        <p class="text-sm opacity-90">On all orders above ₹199</p>
+       </div>
+       <div class="text-3xl">
+        ⚡
+       </div>
+      </div>
+     </div><!-- Cart Benefits -->
+     <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔒
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Secure Payment
+       </div>
+       <div class="text-xs text-gray-600">
+        100% Safe
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🎯
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Live Tracking
+       </div>
+       <div class="text-xs text-gray-600">
+        Real-time updates
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🛒 Your delicious journey is just one click away</p>
+      <p class="text-gray-400 text-xs">Fast delivery • Hot &amp; fresh • Satisfaction guaranteed</p>
+     </div>
+    </div>
+   </div><!-- Payment Page -->
+   <div id="paymentPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="showCart()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl font-bold gradient-text">💳 Payment</h2>
+    </div><!-- Order Summary -->
+    <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+     <h3 class="text-lg font-bold text-gray-800 mb-3">📋 Order Summary</h3>
+     <div id="paymentOrderItems" class="space-y-2 mb-4"><!-- Order items will be populated -->
+     </div>
+     <div class="border-t pt-3">
+      <div class="flex justify-between items-center mb-2"><span class="text-gray-600">Subtotal:</span> <span id="paymentSubtotal" class="font-semibold">₹0</span>
+      </div>
+      <div class="flex justify-between items-center mb-2"><span class="text-gray-600">Delivery Fee:</span> <span class="font-semibold text-green-600">FREE</span>
+      </div>
+      <div class="flex justify-between items-center mb-2"><span class="text-gray-600">GST (5%):</span> <span id="paymentGst" class="font-semibold">₹0</span>
+      </div>
+      <div class="border-t pt-2 flex justify-between items-center"><span class="text-lg font-bold">Total:</span> <span id="paymentTotal" class="text-xl font-bold text-orange-600">₹0</span>
+      </div>
+     </div>
+    </div><!-- Delivery Address -->
+    <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+     <h3 class="text-lg font-bold text-gray-800 mb-3">🏠 Delivery Address</h3>
+     <div class="flex items-start space-x-3"><span class="text-2xl">📍</span>
+      <div class="flex-1">
+       <div class="font-semibold text-gray-800">
+        Home
+       </div>
+       <div class="text-sm text-gray-600">
+        123 Main Street, Sector 15, New Delhi - 110001
+       </div>
+       <div class="text-xs text-green-600 mt-1">
+        ✓ Address verified
+       </div>
+      </div><button class="text-orange-600 text-sm font-medium">Change</button>
+     </div>
+    </div><!-- Payment Methods -->
+    <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+     <h3 class="text-lg font-bold text-gray-800 mb-4">💳 Payment Method</h3>
+     <div class="space-y-3"><!-- PhonePe -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('phonepe')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">📱</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           PhonePe
+          </div>
+          <div class="text-xs text-gray-600">
+           India's most trusted UPI app
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div><!-- Paytm -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('paytm')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">💳</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Paytm
+          </div>
+          <div class="text-xs text-gray-600">
+           Wallet &amp; UPI payments
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div><!-- Google Pay -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('googlepay')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">G</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Google Pay
+          </div>
+          <div class="text-xs text-gray-600">
+           Simple &amp; secure payments
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div><!-- UPI Payment -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('upi')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">UPI</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Other UPI Apps
+          </div>
+          <div class="text-xs text-gray-600">
+           BHIM, Amazon Pay &amp; more
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div><!-- Credit/Debit Card -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('card')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">💳</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Credit/Debit Card
+          </div>
+          <div class="text-xs text-gray-600">
+           Visa, Mastercard, RuPay
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div><!-- Net Banking -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('netbanking')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">🏦</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Net Banking
+          </div>
+          <div class="text-xs text-gray-600">
+           All major banks supported
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div><!-- Cash on Delivery -->
+      <div class="payment-method border-2 border-gray-200 rounded-xl p-3 cursor-pointer hover:border-orange-500 transition duration-300" onclick="selectPaymentMethod('cod')">
+       <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+         <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">💵</span>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Cash on Delivery
+          </div>
+          <div class="text-xs text-gray-600">
+           Pay when you receive
+          </div>
+         </div>
+        </div>
+        <div class="payment-radio w-5 h-5 border-2 border-gray-300 rounded-full"></div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Payment Details Form -->
+    <div id="paymentDetailsForm" class="hidden bg-white rounded-xl shadow-lg p-4 mb-6"><!-- PhonePe Form -->
+     <div id="phonepeForm" class="hidden">
+      <div class="text-center py-4">
+       <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full mx-auto mb-3 flex items-center justify-center"><span class="text-white text-2xl">📱</span>
+       </div>
+       <h4 class="font-bold text-gray-800 mb-2">PhonePe Payment</h4>
+       <p class="text-sm text-gray-600 mb-3">You will be redirected to PhonePe app</p>
+       <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+        <p class="text-xs text-purple-800">💡 Make sure PhonePe app is installed on your device</p>
+       </div>
+      </div>
+     </div><!-- Paytm Form -->
+     <div id="paytmForm" class="hidden">
+      <div class="text-center py-4">
+       <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center"><span class="text-white text-2xl">💳</span>
+       </div>
+       <h4 class="font-bold text-gray-800 mb-2">Paytm Payment</h4>
+       <p class="text-sm text-gray-600 mb-3">Pay using Paytm wallet or UPI</p>
+       <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+        <p class="text-xs text-blue-800">💡 Login to your Paytm account for faster checkout</p>
+       </div>
+      </div>
+     </div><!-- Google Pay Form -->
+     <div id="googlepayForm" class="hidden">
+      <div class="text-center py-4">
+       <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center"><span class="text-white text-2xl font-bold">G</span>
+       </div>
+       <h4 class="font-bold text-gray-800 mb-2">Google Pay</h4>
+       <p class="text-sm text-gray-600 mb-3">Simple, secure &amp; fast payments</p>
+       <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+        <p class="text-xs text-green-800">💡 Use your fingerprint or PIN for quick payment</p>
+       </div>
+      </div>
+     </div><!-- UPI Form -->
+     <div id="upiForm" class="hidden">
+      <h4 class="font-bold text-gray-800 mb-3">Enter UPI ID</h4><input type="text" placeholder="yourname@paytm" class="w-full px-3 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300 mb-3">
+      <div class="text-xs text-gray-600">
+       Other UPI apps: BHIM, Amazon Pay, Mobikwik &amp; more
+      </div>
+     </div><!-- Card Form -->
+     <div id="cardForm" class="hidden">
+      <h4 class="font-bold text-gray-800 mb-3">Card Details</h4>
+      <div class="space-y-3"><input type="text" placeholder="Card Number" class="w-full px-3 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300">
+       <div class="grid grid-cols-2 gap-3"><input type="text" placeholder="MM/YY" class="px-3 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"> <input type="text" placeholder="CVV" class="px-3 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300">
+       </div><input type="text" placeholder="Cardholder Name" class="w-full px-3 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300">
+      </div>
+     </div><!-- Net Banking Form -->
+     <div id="netbankingForm" class="hidden">
+      <h4 class="font-bold text-gray-800 mb-3">Select Your Bank</h4><select class="w-full px-3 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"> <option>Select Bank</option> <option>State Bank of India</option> <option>HDFC Bank</option> <option>ICICI Bank</option> <option>Axis Bank</option> <option>Punjab National Bank</option> <option>Bank of Baroda</option> </select>
+     </div><!-- COD Form -->
+     <div id="codForm" class="hidden">
+      <div class="text-center py-4"><span class="text-4xl">💵</span>
+       <h4 class="font-bold text-gray-800 mt-2">Cash on Delivery</h4>
+       <p class="text-sm text-gray-600 mt-1">Pay cash when your order arrives</p>
+       <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3">
+        <p class="text-xs text-yellow-800">💡 Please keep exact change ready for faster delivery</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Place Order Button -->
+    <div class="space-y-3"><button id="placeOrderBtn" onclick="processPayment()" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled> 🚀 Place Order </button>
+     <div class="text-center">
+      <p class="text-xs text-gray-500">🔒 Your payment information is secure and encrypted</p>
+     </div>
+    </div><!-- Payment Footer -->
+    <div class="mt-8 mb-4"><!-- Security Banner -->
+     <div class="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🔒 100% Secure</h3>
+        <p class="text-sm opacity-90">Your payment is protected</p>
+       </div>
+       <div class="text-3xl">
+        🛡️
+       </div>
+      </div>
+     </div><!-- Payment Features -->
+     <div class="grid grid-cols-3 gap-2 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-lg mb-1">
+        🔐
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        SSL Encrypted
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-lg mb-1">
+        ⚡
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Instant Payment
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-lg mb-1">
+        📱
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        All UPI Apps
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">💳 Safe &amp; secure payment gateway</p>
+      <p class="text-gray-400 text-xs">SSL encrypted • Multiple options • Instant confirmation</p>
+     </div>
+    </div>
+   </div><!-- Order Success Page -->
+   <div id="orderSuccessPage" class="hidden px-4 py-6">
+    <div class="text-center py-12">
+     <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center"><span class="text-4xl">✅</span>
+     </div>
+     <h2 class="text-3xl font-bold gradient-text mb-4">Order Placed Successfully!</h2>
+     <p class="text-gray-600 mb-6">Thank you for choosing Food Hub</p>
+     <div class="bg-white rounded-xl shadow-lg p-6 mb-6"><!-- Order Items Images -->
+      <div id="orderItemsImages" class="flex flex-wrap gap-2 mb-4 justify-center"><!-- Order item images will be populated here -->
+      </div>
+      <div class="flex items-center justify-between mb-4"><span class="font-bold text-gray-800">Order ID:</span> <span id="orderIdDisplay" class="text-orange-600 font-bold">#FH1003</span>
+      </div>
+      <div class="flex items-center justify-between mb-4"><span class="font-bold text-gray-800">Estimated Delivery:</span> <span class="text-green-600 font-bold">25-30 minutes</span>
+      </div>
+      <div class="flex items-center justify-between"><span class="font-bold text-gray-800">Total Paid:</span> <span id="totalPaidDisplay" class="text-2xl font-bold text-orange-600">₹0</span>
+      </div>
+     </div>
+     <div class="space-y-3"><button onclick="trackOrder()" class="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-xl font-bold hover:from-blue-600 hover:to-indigo-600 transition duration-300"> 📍 Track Your Order </button> <button onclick="showCategories()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition duration-300"> 🍽️ Order More Food </button>
+     </div>
+    </div><!-- Attractive Footer -->
+    <div class="mt-8 mb-4"><!-- Special Offers Banner -->
+     <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🎉 Special Offers!</h3>
+        <p class="text-sm opacity-90">Get 20% off on orders above ₹299</p>
+       </div>
+       <div class="text-3xl">
+        🍽️
+       </div>
+      </div>
+     </div><!-- Quick Stats -->
+     <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⚡
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fast Delivery
+       </div>
+       <div class="text-xs text-gray-600">
+        25-30 mins
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        ⭐
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Top Rated
+       </div>
+       <div class="text-xs text-gray-600">
+        4.8/5 Rating
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔥
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Fresh Food
+       </div>
+       <div class="text-xs text-gray-600">
+        Made to order
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🌟 Discover amazing flavors from around the world</p>
+      <p class="text-gray-400 text-xs">Fresh ingredients • Expert chefs • Delivered with love</p>
+     </div>
+    </div>
+   </div><!-- Thank You & Rating Page -->
+   <div id="thankYouPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="showOrderSuccess()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl font-bold gradient-text">💝 Thank You!</h2>
+    </div>
+    <div class="text-center py-8">
+     <div class="w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-6 flex items-center justify-center"><span class="text-6xl">🙏</span>
+     </div>
+     <h2 class="text-3xl font-bold gradient-text mb-4">Thank You for Your Order!</h2>
+     <p class="text-gray-600 mb-8">We hope you enjoyed your meal experience with Food Hub</p><!-- Rating Section -->
+     <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">⭐ Rate Your Experience</h3>
+      <div class="flex justify-center space-x-2 mb-4"><button onclick="setRating(1)" class="rating-star text-4xl text-gray-300 hover:text-yellow-400 transition duration-300" data-rating="1">⭐</button> <button onclick="setRating(2)" class="rating-star text-4xl text-gray-300 hover:text-yellow-400 transition duration-300" data-rating="2">⭐</button> <button onclick="setRating(3)" class="rating-star text-4xl text-gray-300 hover:text-yellow-400 transition duration-300" data-rating="3">⭐</button> <button onclick="setRating(4)" class="rating-star text-4xl text-gray-300 hover:text-yellow-400 transition duration-300" data-rating="4">⭐</button> <button onclick="setRating(5)" class="rating-star text-4xl text-gray-300 hover:text-yellow-400 transition duration-300" data-rating="5">⭐</button>
+      </div>
+      <p id="ratingText" class="text-gray-600 text-sm mb-4">Please rate your experience</p>
+     </div><!-- Feedback Section -->
+     <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">💬 Share Your Feedback</h3><textarea id="feedbackText" placeholder="Tell us about your experience... (optional)" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300 resize-none" rows="4"></textarea>
+     </div><!-- Quick Feedback Options -->
+     <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">🚀 Quick Feedback</h3>
+      <div class="grid grid-cols-2 gap-3"><button onclick="toggleQuickFeedback(this, 'Great Food')" class="quick-feedback-btn border-2 border-gray-200 rounded-xl p-3 text-sm font-medium hover:border-orange-500 transition duration-300"> 🍽️ Great Food </button> <button onclick="toggleQuickFeedback(this, 'Fast Delivery')" class="quick-feedback-btn border-2 border-gray-200 rounded-xl p-3 text-sm font-medium hover:border-orange-500 transition duration-300"> 🚚 Fast Delivery </button> <button onclick="toggleQuickFeedback(this, 'Good Packaging')" class="quick-feedback-btn border-2 border-gray-200 rounded-xl p-3 text-sm font-medium hover:border-orange-500 transition duration-300"> 📦 Good Packaging </button> <button onclick="toggleQuickFeedback(this, 'Excellent Service')" class="quick-feedback-btn border-2 border-gray-200 rounded-xl p-3 text-sm font-medium hover:border-orange-500 transition duration-300"> 👨‍💼 Excellent Service </button>
+      </div>
+     </div>
+     <div class="space-y-3"><button onclick="submitFeedback()" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-600 transition duration-300"> ✨ Submit Feedback </button> <button onclick="showCategories()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition duration-300"> 🍽️ Order Again </button>
+     </div>
+    </div><!-- Footer -->
+    <div class="text-center py-6 mt-8">
+     <p class="text-gray-500 text-sm mb-2">💝 Your feedback helps us serve you better</p>
+     <p class="text-gray-400 text-xs">Customer satisfaction • Continuous improvement • Quality service</p>
+    </div>
+   </div><!-- Orders Page -->
+   <div id="ordersPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="showCategories()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <h2 class="text-2xl font-bold gradient-text">📋 My Orders</h2>
+    </div>
+    <div id="ordersList" class="space-y-4">
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between mb-2"><span class="font-bold text-gray-800">Order #1001</span> <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-bold">Delivered</span>
+      </div>
+      <p class="text-sm text-gray-600 mb-2">🍕 Margherita Pizza, 🍔 Veg Burger</p>
+      <div class="flex justify-between items-center"><span class="text-orange-600 font-bold">₹399</span> <span class="text-xs text-gray-500">2 days ago</span>
+      </div>
+     </div>
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between mb-2"><span class="font-bold text-gray-800">Order #1002</span> <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-bold">Preparing</span>
+      </div>
+      <p class="text-sm text-gray-600 mb-2">🍗 Chicken Biryani, 🥗 Caesar Salad</p>
+      <div class="flex justify-between items-center"><span class="text-orange-600 font-bold">₹549</span> <span class="text-xs text-gray-500">30 mins ago</span>
+      </div>
+     </div>
+    </div><!-- Orders Footer -->
+    <div class="mt-8 mb-4"><!-- Reorder Banner -->
+     <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">🔄 Quick Reorder</h3>
+        <p class="text-sm opacity-90">Order your favorites again</p>
+       </div>
+       <div class="text-3xl">
+        ❤️
+       </div>
+      </div>
+     </div><!-- Order Features -->
+     <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        📍
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Live Tracking
+       </div>
+       <div class="text-xs text-gray-600">
+        Real-time updates
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔔
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Notifications
+       </div>
+       <div class="text-xs text-gray-600">
+        Order alerts
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">📋 Track your culinary adventures</p>
+      <p class="text-gray-400 text-xs">Order history • Real-time updates • Easy reordering</p>
+     </div>
+    </div>
+   </div><!-- Search Page -->
+   <div id="searchPage" class="hidden px-4 py-6">
+    <div class="flex items-center mb-4"><button onclick="showCategories()" class="p-2 bg-gray-100 rounded-full mr-3 hover:bg-gray-200 transition duration-300"> <span class="text-lg">←</span> </button>
+     <div class="flex-1"><input type="text" id="searchInput" placeholder="Search for dishes..." class="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300" oninput="performSearch()">
+     </div>
+    </div>
+    <div id="searchResults" class="space-y-4">
+     <div class="text-center py-12"><span class="text-6xl">🔍</span>
+      <h3 class="text-xl font-bold text-gray-600 mt-4">Search for delicious food</h3>
+      <p class="text-gray-500">Type in the search box to find your favorite dishes</p>
+     </div>
+    </div><!-- Search Footer -->
+    <div class="mt-8 mb-4"><!-- Search Tips Banner -->
+     <div class="bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">💡 Search Tips</h3>
+        <p class="text-sm opacity-90">Try "spicy", "biryani", "pizza"</p>
+       </div>
+       <div class="text-3xl">
+        🔍
+       </div>
+      </div>
+     </div><!-- Popular Searches -->
+     <div class="mb-4">
+      <h4 class="text-sm font-bold text-gray-700 mb-2">🔥 Popular Searches:</h4>
+      <div class="flex flex-wrap gap-2"><span class="bg-white px-3 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">🍕 Pizza</span> <span class="bg-white px-3 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">🍗 Biryani</span> <span class="bg-white px-3 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">🧀 Paneer</span> <span class="bg-white px-3 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">🍔 Burger</span>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">🔍 Find your perfect meal in seconds</p>
+      <p class="text-gray-400 text-xs">Smart search • Quick results • Instant ordering</p>
+     </div>
+    </div>
+   </div><!-- Profile Page -->
+   <div id="profilePage" class="hidden px-4 py-6">
+    <div class="text-center mb-6">
+     <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center"><span class="text-3xl">👤</span>
+     </div>
+     <h2 class="text-2xl font-bold text-gray-800">My Profile</h2>
+     <p class="text-gray-600 text-sm">Manage your account and preferences</p>
+    </div>
+    <div class="space-y-4">
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between">
+       <div class="flex items-center"><span class="text-2xl mr-3">📧</span>
+        <div>
+         <div class="font-semibold">
+          Email
+         </div>
+         <div class="text-sm text-gray-600">
+          user@foodhub.com
+         </div>
+        </div>
+       </div><span class="text-orange-600">→</span>
+      </div>
+     </div>
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between">
+       <div class="flex items-center"><span class="text-2xl mr-3">📱</span>
+        <div>
+         <div class="font-semibold">
+          Phone
+         </div>
+         <div class="text-sm text-gray-600">
+          +91 98765 43210
+         </div>
+        </div>
+       </div><span class="text-orange-600">→</span>
+      </div>
+     </div>
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between">
+       <div class="flex items-center"><span class="text-2xl mr-3">🏠</span>
+        <div>
+         <div class="font-semibold">
+          Address
+         </div>
+         <div class="text-sm text-gray-600">
+          123 Main Street, City
+         </div>
+        </div>
+       </div><span class="text-orange-600">→</span>
+      </div>
+     </div><!-- My Feedbacks Section -->
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between cursor-pointer" onclick="toggleFeedbackSection()">
+       <div class="flex items-center"><span class="text-2xl mr-3">💬</span>
+        <div>
+         <div class="font-semibold">
+          My Feedbacks
+         </div>
+         <div class="text-sm text-gray-600" id="feedbackCount">
+          0 feedbacks given
+         </div>
+        </div>
+       </div><span class="text-orange-600" id="feedbackToggle">→</span>
+      </div><!-- Feedbacks List -->
+      <div id="feedbacksList" class="hidden mt-4 space-y-3 border-t pt-4">
+       <div id="noFeedbacks" class="text-center py-4 text-gray-500"><span class="text-3xl">📝</span>
+        <p class="text-sm mt-2">No feedbacks yet</p>
+        <p class="text-xs">Your feedback helps us improve!</p>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="flex items-center justify-between">
+       <div class="flex items-center"><span class="text-2xl mr-3">ℹ️</span>
+        <div>
+         <div class="font-semibold">
+          About App
+         </div>
+         <div class="text-sm text-gray-600">
+          Food Hub - Delicious meals delivered
+         </div>
+        </div>
+       </div><span class="text-orange-600">→</span>
+      </div>
+     </div><button onclick="logout()" class="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition duration-300"> 🚪 Logout </button>
+    </div><!-- Profile Footer -->
+    <div class="mt-8 mb-4"><!-- Loyalty Banner -->
+     <div class="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-4 mb-4 text-white">
+      <div class="flex items-center justify-between">
+       <div>
+        <h3 class="font-bold text-lg">⭐ Loyalty Points</h3>
+        <p class="text-sm opacity-90">Earn points with every order</p>
+       </div>
+       <div class="text-3xl">
+        🎁
+       </div>
+      </div>
+     </div><!-- Profile Benefits -->
+     <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🎯
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Personalized
+       </div>
+       <div class="text-xs text-gray-600">
+        Just for you
+       </div>
+      </div>
+      <div class="bg-white rounded-xl p-3 text-center shadow-md">
+       <div class="text-2xl mb-1">
+        🔒
+       </div>
+       <div class="text-xs font-bold text-gray-800">
+        Secure Data
+       </div>
+       <div class="text-xs text-gray-600">
+        Privacy first
+       </div>
+      </div>
+     </div><!-- Main Footer -->
+     <div class="text-center py-4">
+      <p class="text-gray-500 text-sm mb-2">👤 Your personalized food experience</p>
+      <p class="text-gray-400 text-xs">Account settings • Order preferences • Secure &amp; private</p>
+     </div>
+    </div>
+   </div><!-- Bottom Navigation -->
+   <nav class="bottom-nav">
+    <div class="flex justify-around items-center py-2"><a href="#" class="nav-item active" onclick="setActiveNav(this); showCategories()"> <span class="text-xl">🏠</span> <span class="text-xs font-medium">Home</span> </a> <a href="#" class="nav-item" onclick="setActiveNav(this); showOrders()"> <span class="text-xl">📋</span> <span class="text-xs font-medium">Orders</span> </a> <a href="#" class="nav-item" onclick="setActiveNav(this); showCart()"> <span class="text-xl">🛒</span> <span class="text-xs font-medium">Cart</span> <span id="cartBadge" class="nav-badge hidden">0</span> </a> <a href="#" class="nav-item" onclick="setActiveNav(this); showProfile()"> <span class="text-xl">👤</span> <span class="text-xs font-medium">Profile</span> </a>
+    </div>
+   </nav>
+  </div>
+  <script>
+        // Global variables
+        let currentCategory = '';
+        let cart = [];
+        let userFeedbacks = [];
+
+        // Handle login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            const password = event.target.querySelector('input[type="password"]').value;
+            
+            if (email && password) {
+                document.getElementById('authPage').classList.add('hidden');
+                document.getElementById('mainPage').classList.remove('hidden');
+                showCategories();
+            }
+        }
+
+        // Handle register form submission
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = event.target.querySelector('input[type="text"]').value;
+            const email = event.target.querySelector('input[type="email"]').value;
+            const password = event.target.querySelector('input[type="password"]').value;
+            
+            if (name && email && password) {
+                document.getElementById('authPage').classList.add('hidden');
+                document.getElementById('mainPage').classList.remove('hidden');
+                showCategories();
+            }
+        }
+
+        // Show register form
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        // Show login form
+        function showLogin() {
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+        }
+
+        // Show categories page
+        function showCategories() {
+            hideAllPages();
+            document.getElementById('categoriesPage').classList.remove('hidden');
+        }
+
+        // Show profile page
+        function showProfile() {
+            hideAllPages();
+            document.getElementById('profilePage').classList.remove('hidden');
+        }
+
+        // Menu data
+        const menuData = {
+            vegetables: {
+                title: '🥕 Vegetables',
+                items: [
+                    { name: 'Baingan Bharta', price: 159, emoji: '🍆', description: 'Smoky roasted eggplant mash with onions and spices', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Aloo Gobi', price: 129, emoji: '🥔', description: 'Cauliflower and potato curry with traditional spices', image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Bhindi Masala', price: 139, emoji: '🌶️', description: 'Spicy okra curry with onions and tomatoes', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Dal Tadka', price: 119, emoji: '🍲', description: 'Yellow lentils tempered with cumin and garlic', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Chana Masala', price: 149, emoji: '🫘', description: 'Spicy chickpea curry with aromatic Indian spices', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Rajma Curry', price: 159, emoji: '🫘', description: 'Kidney beans in rich tomato and onion gravy', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Sarson Ka Saag', price: 169, emoji: '🥬', description: 'Traditional Punjabi mustard greens with makki roti', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Methi Malai Mutter', price: 179, emoji: '🌿', description: 'Fenugreek leaves with green peas in creamy gravy', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Lauki Kofta', price: 149, emoji: '🥒', description: 'Bottle gourd dumplings in spiced tomato curry', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Tinda Masala', price: 139, emoji: '🥒', description: 'Baby pumpkin cooked in onion tomato masala', image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Karela Sabzi', price: 129, emoji: '🥒', description: 'Bitter gourd stir-fry with onions and spices', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop&q=80' },
+                    { name: 'Cabbage Poriyal', price: 119, emoji: '🥬', description: 'South Indian style cabbage stir-fry with coconut', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop&q=80' }
+                ]
+            },
+            paneer: {
+                title: '🧀 Paneer',
+                items: [
+                    { name: 'Paneer Butter Masala', price: 199, emoji: '🧀', description: 'Creamy paneer in rich tomato gravy', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Palak Paneer', price: 189, emoji: '🥬', description: 'Paneer cubes in spinach gravy', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Tikka', price: 219, emoji: '🔥', description: 'Grilled paneer with bell peppers and onions', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300&h=200&fit=crop' },
+                    { name: 'Kadai Paneer', price: 209, emoji: '🍳', description: 'Paneer cooked with capsicum in spicy gravy', image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=300&h=200&fit=crop' },
+                    { name: 'Shahi Paneer', price: 229, emoji: '👑', description: 'Royal paneer curry with cashews and cream', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Makhani', price: 219, emoji: '🧈', description: 'Paneer in buttery tomato and cream sauce', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Lababdar', price: 239, emoji: '🌶️', description: 'Spicy paneer curry with onions and tomatoes', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Bhurji', price: 179, emoji: '🍳', description: 'Scrambled paneer with onions and spices', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Kofta', price: 249, emoji: '⚪', description: 'Paneer dumplings in rich creamy gravy', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Jalfrezi', price: 199, emoji: '🌈', description: 'Stir-fried paneer with colorful bell peppers', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Pasanda', price: 259, emoji: '💎', description: 'Stuffed paneer slices in rich Mughlai gravy', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Tikka Masala', price: 229, emoji: '🔥', description: 'Grilled paneer tikka in spiced tomato curry', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop' }
+                ]
+            },
+            pizza: {
+                title: '🍕 Pizza',
+                items: [
+                    { name: 'Margherita Pizza', price: 249, emoji: '🍕', description: 'Classic pizza with tomato sauce and mozzarella', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=200&fit=crop' },
+                    { name: 'Veggie Supreme', price: 299, emoji: '🥬', description: 'Loaded with fresh vegetables and cheese', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Tikka Pizza', price: 329, emoji: '🧀', description: 'Pizza topped with paneer tikka and onions', image: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=300&h=200&fit=crop' },
+                    { name: 'Corn & Cheese', price: 279, emoji: '🌽', description: 'Sweet corn with extra cheese topping', image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&h=200&fit=crop' },
+                    { name: 'Farmhouse Pizza', price: 319, emoji: '🌿', description: 'Capsicum, mushroom, tomato with cheese', image: 'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?w=300&h=200&fit=crop' },
+                    { name: 'Mexican Green Wave', price: 339, emoji: '🌶️', description: 'Jalapenos, capsicum, onion with Mexican herbs', image: 'https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=300&h=200&fit=crop' },
+                    { name: 'Cheese Burst Pizza', price: 359, emoji: '🧀', description: 'Extra cheese stuffed crust with toppings', image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300&h=200&fit=crop' },
+                    { name: 'Mushroom Delight', price: 289, emoji: '🍄', description: 'Fresh mushrooms with herbs and cheese', image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=300&h=200&fit=crop' },
+                    { name: 'Peppy Paneer', price: 309, emoji: '🌶️', description: 'Spicy paneer with capsicum and red paprika', image: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=300&h=200&fit=crop' },
+                    { name: 'Veg Extravaganza', price: 379, emoji: '🎉', description: 'Black olives, capsicum, onion, grilled mushroom', image: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=300&h=200&fit=crop' },
+                    { name: 'Deluxe Veggie', price: 349, emoji: '🥕', description: 'Onion, capsicum, mushroom, black olives', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop' },
+                    { name: 'Tandoori Paneer', price: 329, emoji: '🔥', description: 'Tandoori paneer with onion and mint mayo', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=200&fit=crop' }
+                ]
+            },
+            burgers: {
+                title: '🍔 Burgers',
+                items: [
+                    { name: 'Classic Veg Burger', price: 99, emoji: '🍔', description: 'Crispy veg patty with fresh lettuce and tomato', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&h=200&fit=crop' },
+                    { name: 'Paneer Tikka Burger', price: 129, emoji: '🧀', description: 'Grilled paneer patty with special sauce', image: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop' },
+                    { name: 'Aloo Tikki Burger', price: 89, emoji: '🥔', description: 'Spiced potato patty with mint chutney', image: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=300&h=200&fit=crop' },
+                    { name: 'Cheese Burst Burger', price: 119, emoji: '🧀', description: 'Double cheese with crispy veg patty', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=300&h=200&fit=crop' },
+                    { name: 'Mushroom Swiss Burger', price: 149, emoji: '🍄', description: 'Grilled mushroom with swiss cheese', image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=300&h=200&fit=crop' },
+                    { name: 'Quinoa Power Burger', price: 159, emoji: '💪', description: 'Healthy quinoa patty with avocado', image: 'https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=300&h=200&fit=crop' },
+                    { name: 'Mediterranean Burger', price: 139, emoji: '🫒', description: 'Falafel patty with hummus and olives', image: 'https://images.unsplash.com/photo-1520072959219-c595dc870360?w=300&h=200&fit=crop' },
+                    { name: 'BBQ Veggie Burger', price: 129, emoji: '🔥', description: 'Smoky BBQ sauce with grilled vegetables', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=300&h=200&fit=crop' },
+                    { name: 'Spicy Bean Burger', price: 109, emoji: '🌶️', description: 'Black bean patty with jalapeños', image: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=300&h=200&fit=crop' },
+                    { name: 'Crispy Corn Burger', price: 99, emoji: '🌽', description: 'Sweet corn patty with mayo and lettuce', image: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop' },
+                    { name: 'Tandoori Veggie Burger', price: 139, emoji: '🔥', description: 'Tandoori spiced patty with mint sauce', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&h=200&fit=crop' },
+                    { name: 'Double Decker Burger', price: 179, emoji: '🏗️', description: 'Two patties with cheese and special sauce', image: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=300&h=200&fit=crop' }
+                ]
+            },
+            pasta: {
+                title: '🍝 Pasta',
+                items: [
+                    { name: 'Penne Arrabbiata', price: 179, emoji: '🍝', description: 'Spicy tomato sauce with penne pasta', image: 'https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=300&h=200&fit=crop' },
+                    { name: 'Alfredo Fettuccine', price: 199, emoji: '🧄', description: 'Creamy white sauce pasta with herbs', image: 'https://images.unsplash.com/photo-1563379091339-03246963d96c?w=300&h=200&fit=crop' },
+                    { name: 'Veggie Pasta Primavera', price: 189, emoji: '🥕', description: 'Mixed vegetables with pasta in tomato sauce', image: 'https://images.unsplash.com/photo-1572441713132-51c75654db73?w=300&h=200&fit=crop' },
+                    { name: 'Mac & Cheese', price: 169, emoji: '🧀', description: 'Macaroni in rich cheese sauce', image: 'https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop' },
+                    { name: 'Spaghetti Aglio Olio', price: 159, emoji: '🫒', description: 'Classic Italian pasta with garlic and olive oil', image: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?w=300&h=200&fit=crop' },
+                    { name: 'Pesto Pasta', price: 209, emoji: '🌿', description: 'Fresh basil pesto with pine nuts', image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=300&h=200&fit=crop' },
+                    { name: 'Mushroom Risotto', price: 229, emoji: '🍄', description: 'Creamy arborio rice with mushrooms', image: 'https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=300&h=200&fit=crop' },
+                    { name: 'Spinach Lasagna', price: 249, emoji: '🥬', description: 'Layered pasta with spinach and cheese', image: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=300&h=200&fit=crop' },
+                    { name: 'Carbonara Pasta', price: 219, emoji: '🥓', description: 'Creamy pasta with parmesan and herbs', image: 'https://images.unsplash.com/photo-1608756687911-aa1599ab3bd9?w=300&h=200&fit=crop' },
+                    { name: 'Ravioli Marinara', price: 239, emoji: '🥟', description: 'Cheese-filled ravioli in marinara sauce', image: 'https://images.unsplash.com/photo-1587740908075-1ebe64dda78e?w=300&h=200&fit=crop' },
+                    { name: 'Gnocchi Pomodoro', price: 199, emoji: '🍅', description: 'Potato dumplings in fresh tomato sauce', image: 'https://images.unsplash.com/photo-1563379091339-03246963d96c?w=300&h=200&fit=crop' },
+                    { name: 'Linguine Puttanesca', price: 189, emoji: '🫒', description: 'Pasta with olives, capers, and tomatoes', image: 'https://images.unsplash.com/photo-1572441713132-51c75654db73?w=300&h=200&fit=crop' }
+                ]
+            },
+            salads: {
+                title: '🥗 Salads',
+                items: [
+                    { name: 'Caesar Salad', price: 149, emoji: '🥗', description: 'Fresh lettuce with caesar dressing and croutons', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=200&fit=crop' },
+                    { name: 'Greek Salad', price: 159, emoji: '🫒', description: 'Olives, feta cheese with fresh vegetables', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&h=200&fit=crop' },
+                    { name: 'Garden Fresh Salad', price: 129, emoji: '🥒', description: 'Mixed fresh vegetables with olive oil dressing', image: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=300&h=200&fit=crop' },
+                    { name: 'Tropical Fruit Salad', price: 119, emoji: '🍎', description: 'Seasonal fresh fruits with honey dressing', image: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&h=200&fit=crop' },
+                    { name: 'Mediterranean Bowl', price: 179, emoji: '🌿', description: 'Quinoa, olives, tomatoes with herb dressing', image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=300&h=200&fit=crop' },
+                    { name: 'Avocado Quinoa Salad', price: 189, emoji: '🥑', description: 'Superfood salad with avocado and quinoa', image: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=300&h=200&fit=crop' },
+                    { name: 'Caprese Salad', price: 169, emoji: '🍅', description: 'Fresh mozzarella, tomatoes, and basil', image: 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=300&h=200&fit=crop' },
+                    { name: 'Protein Power Bowl', price: 199, emoji: '💪', description: 'Chickpeas, nuts, seeds with mixed greens', image: 'https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=300&h=200&fit=crop' },
+                    { name: 'Asian Fusion Salad', price: 159, emoji: '🥢', description: 'Mixed greens with sesame ginger dressing', image: 'https://images.unsplash.com/photo-1505576391880-b3f9d713dc4f?w=300&h=200&fit=crop' },
+                    { name: 'Waldorf Salad', price: 149, emoji: '🍇', description: 'Apples, grapes, walnuts with creamy dressing', image: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&h=200&fit=crop' },
+                    { name: 'Kale Power Salad', price: 169, emoji: '🥬', description: 'Superfood kale with cranberries and nuts', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&h=200&fit=crop' },
+                    { name: 'Chickpea Crunch Salad', price: 139, emoji: '🫘', description: 'Roasted chickpeas with fresh vegetables', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=200&fit=crop' }
+                ]
+            },
+            cooldrinks: {
+                title: '🥤 Cool Drinks',
+                items: [
+                    { name: 'Fresh Lime Soda', price: 49, emoji: '🍋', description: 'Refreshing lime with sparkling water and mint', image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300&h=200&fit=crop' },
+                    { name: 'Mango Lassi', price: 79, emoji: '🥭', description: 'Creamy yogurt drink with fresh mango pulp', image: 'https://images.unsplash.com/photo-1553787434-6e5a6c3e5b3f?w=300&h=200&fit=crop' },
+                    { name: 'Cold Coffee', price: 89, emoji: '☕', description: 'Chilled coffee with milk and ice cream', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&h=200&fit=crop' },
+                    { name: 'Fresh Orange Juice', price: 69, emoji: '🍊', description: 'Freshly squeezed orange juice with pulp', image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=200&fit=crop' },
+                    { name: 'Watermelon Juice', price: 59, emoji: '🍉', description: 'Fresh watermelon juice with mint leaves', image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=300&h=200&fit=crop' },
+                    { name: 'Chocolate Milkshake', price: 99, emoji: '🍫', description: 'Rich chocolate shake with whipped cream', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300&h=200&fit=crop' },
+                    { name: 'Strawberry Smoothie', price: 89, emoji: '🍓', description: 'Creamy strawberry smoothie with yogurt', image: 'https://images.unsplash.com/photo-1553787434-6e5a6c3e5b3f?w=300&h=200&fit=crop' },
+                    { name: 'Coconut Water', price: 39, emoji: '🥥', description: 'Fresh tender coconut water naturally sweet', image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=300&h=200&fit=crop' },
+                    { name: 'Iced Tea', price: 59, emoji: '🧊', description: 'Refreshing iced tea with lemon and mint', image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&h=200&fit=crop' },
+                    { name: 'Virgin Mojito', price: 79, emoji: '🌿', description: 'Mint and lime refresher with soda water', image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=300&h=200&fit=crop' },
+                    { name: 'Banana Shake', price: 69, emoji: '🍌', description: 'Creamy banana milkshake with honey', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300&h=200&fit=crop' },
+                    { name: 'Pineapple Juice', price: 65, emoji: '🍍', description: 'Fresh pineapple juice with ginger twist', image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=200&fit=crop' },
+                    { name: 'Blue Lagoon', price: 89, emoji: '💙', description: 'Blue curacao mocktail with lemon and soda', image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=300&h=200&fit=crop' },
+                    { name: 'Green Apple Juice', price: 75, emoji: '🍏', description: 'Tart green apple juice with mint garnish', image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=300&h=200&fit=crop' },
+                    { name: 'Rose Milk', price: 69, emoji: '🌹', description: 'Traditional rose flavored milk drink', image: 'https://images.unsplash.com/photo-1553787434-6e5a6c3e5b3f?w=300&h=200&fit=crop' },
+                    { name: 'Lemonade', price: 45, emoji: '🍋', description: 'Classic fresh lemonade with sugar and ice', image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&h=200&fit=crop' },
+                    { name: 'Sprite', price: 35, emoji: '🥤', description: 'Crisp lemon-lime flavored carbonated soft drink', image: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300&h=200&fit=crop' },
+                    { name: 'Coca Cola', price: 35, emoji: '🥤', description: 'Classic cola soft drink with refreshing taste', image: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=300&h=200&fit=crop' },
+                    { name: 'Pepsi', price: 35, emoji: '🥤', description: 'Bold cola flavor with a refreshing fizz', image: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=300&h=200&fit=crop' },
+                    { name: 'Fanta Orange', price: 35, emoji: '🍊', description: 'Orange flavored carbonated soft drink', image: 'https://images.unsplash.com/photo-1625772452859-1c37d263ddcc?w=300&h=200&fit=crop' },
+                    { name: 'String Mango Drink', price: 25, emoji: '🥭', description: 'Tangy mango flavored drink with real fruit pulp', image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=300&h=200&fit=crop' },
+                    { name: 'Campa Cola', price: 30, emoji: '🥤', description: 'Indian cola with unique taste and fizz', image: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=300&h=200&fit=crop' },
+                    { name: 'Maaza Mango Drink', price: 40, emoji: '🥭', description: 'Rich mango drink made from Alphonso mangoes', image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=300&h=200&fit=crop' },
+                    { name: 'Frooti Mango Drink', price: 35, emoji: '🥭', description: 'Fresh n juicy mango drink with real fruit taste', image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=300&h=200&fit=crop' },
+                    { name: 'Slice Mango Drink', price: 40, emoji: '🥭', description: 'Thick mango drink with chunks of real mango', image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=300&h=200&fit=crop' },
+                    { name: 'Limca Lemon Drink', price: 35, emoji: '🍋', description: 'Lemon lime sparkling drink with citrus punch', image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300&h=200&fit=crop' },
+                    { name: 'Thums Up Cola', price: 35, emoji: '🥤', description: 'Strong cola with thundering taste', image: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=300&h=200&fit=crop' },
+                    { name: '7UP Lemon Soda', price: 35, emoji: '🥤', description: 'Clear lemon-lime soda with crisp taste', image: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300&h=200&fit=crop' },
+                    { name: 'Mountain Dew', price: 40, emoji: '💚', description: 'Citrus flavored carbonated soft drink', image: 'https://images.unsplash.com/photo-1625772452859-1c37d263ddcc?w=300&h=200&fit=crop' },
+                    { name: 'Real Mixed Fruit Juice', price: 50, emoji: '🍎', description: 'Mixed fruit juice with no added sugar', image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=200&fit=crop' },
+                    { name: 'Tropicana Orange Juice', price: 55, emoji: '🍊', description: '100% pure orange juice with no preservatives', image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=200&fit=crop' },
+                    { name: 'Red Bull Energy Drink', price: 125, emoji: '⚡', description: 'Energy drink that gives you wings', image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=300&h=200&fit=crop' },
+                    { name: 'Monster Energy Drink', price: 150, emoji: '👹', description: 'High caffeine energy drink for extreme energy', image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=300&h=200&fit=crop' },
+                    { name: 'Appy Fizz Apple Drink', price: 45, emoji: '🍎', description: 'Sparkling apple drink with fizzy bubbles', image: 'https://images.unsplash.com/photo-1625772452859-1c37d263ddcc?w=300&h=200&fit=crop' },
+                    { name: 'Bisleri Soda Water', price: 25, emoji: '💧', description: 'Plain soda water for mixing and refreshment', image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300&h=200&fit=crop' },
+                    { name: 'Jeera Soda Water', price: 30, emoji: '🌿', description: 'Cumin flavored soda water with digestive properties', image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300&h=200&fit=crop' }
+                ]
+            },
+            chicken: {
+                title: '🍗 Chicken',
+                items: [
+                    { name: 'Chicken Biryani', price: 299, emoji: '🍗', description: 'Aromatic basmati rice with tender chicken pieces', image: 'https://images.unsplash.com/photo-1563379091339-03246963d96c?w=300&h=200&fit=crop' },
+                    { name: 'Butter Chicken', price: 279, emoji: '🧈', description: 'Creamy tomato gravy with succulent chicken', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Tikka', price: 249, emoji: '🔥', description: 'Grilled chicken marinated in yogurt and spices', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Curry', price: 229, emoji: '🍛', description: 'Traditional chicken curry with aromatic spices', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Tandoori', price: 269, emoji: '🔴', description: 'Clay oven roasted chicken with authentic spices', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Korma', price: 259, emoji: '🥥', description: 'Mild creamy chicken curry with cashews and coconut', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop' },
+                    { name: 'Chicken 65', price: 239, emoji: '🌶️', description: 'Spicy deep-fried chicken appetizer from South India', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Lollipop', price: 219, emoji: '🍭', description: 'Crispy chicken drumettes shaped like lollipops', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Shawarma', price: 189, emoji: '🌯', description: 'Middle Eastern style wrapped chicken with garlic sauce', image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Wings', price: 199, emoji: '🍗', description: 'Spicy buffalo wings with blue cheese dip', image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Dum Biryani', price: 319, emoji: '🍚', description: 'Slow-cooked biryani with layers of flavor', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=300&h=200&fit=crop' },
+                    { name: 'Chicken Kadai', price: 249, emoji: '🍳', description: 'Wok-tossed chicken with bell peppers and onions', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' }
+                ]
+            },
+            mutton: {
+                title: '🥩 Mutton',
+                items: [
+                    { name: 'Mutton Biryani', price: 399, emoji: '🥩', description: 'Premium basmati rice with tender mutton pieces', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Curry', price: 349, emoji: '🍛', description: 'Rich and flavorful mutton curry', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Kebab', price: 329, emoji: '🔥', description: 'Grilled mutton kebabs with mint chutney', image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Rogan Josh', price: 379, emoji: '🌶️', description: 'Kashmiri style mutton in aromatic gravy', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Korma', price: 389, emoji: '🥥', description: 'Creamy mutton curry with cashews and yogurt', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Seekh Kebab', price: 359, emoji: '🍢', description: 'Spiced minced mutton grilled on skewers', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Vindaloo', price: 369, emoji: '🔥', description: 'Goan style spicy mutton curry with vinegar', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Keema', price: 319, emoji: '🍛', description: 'Spiced minced mutton with peas and onions', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Chops', price: 429, emoji: '🥩', description: 'Tender mutton chops marinated and grilled', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Nihari', price: 409, emoji: '🍲', description: 'Slow-cooked mutton stew with aromatic spices', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Haleem', price: 339, emoji: '🥣', description: 'Lentil and mutton stew cooked to perfection', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Karahi', price: 379, emoji: '🍳', description: 'Wok-cooked mutton with tomatoes and green chilies', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Paya', price: 299, emoji: '🦴', description: 'Traditional trotters curry slow-cooked overnight', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Mutton Boti Kebab', price: 349, emoji: '🔥', description: 'Cubed mutton pieces grilled with spices', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=300&h=200&fit=crop' }
+                ]
+            },
+            fish: {
+                title: '🐟 Fish',
+                items: [
+                    { name: 'Fish Curry', price: 279, emoji: '🐟', description: 'Fresh fish cooked in coconut curry', image: 'https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=300&h=200&fit=crop' },
+                    { name: 'Fish Fry', price: 249, emoji: '🍤', description: 'Crispy fried fish with spices', image: 'https://images.unsplash.com/photo-1559847844-d721426d6edc?w=300&h=200&fit=crop' },
+                    { name: 'Fish Biryani', price: 329, emoji: '🍚', description: 'Aromatic rice with fresh fish pieces', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=300&h=200&fit=crop' },
+                    { name: 'Grilled Salmon', price: 399, emoji: '🔥', description: 'Premium grilled salmon with herbs', image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=300&h=200&fit=crop' },
+                    { name: 'Fish Tikka', price: 299, emoji: '🎣', description: 'Marinated fish grilled to perfection', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300&h=200&fit=crop' },
+                    { name: 'Prawn Curry', price: 349, emoji: '🦐', description: 'Juicy prawns in spicy coconut gravy', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop' },
+                    { name: 'Fish Amritsari', price: 269, emoji: '🐠', description: 'Punjabi style battered and fried fish', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop' },
+                    { name: 'Pomfret Curry', price: 359, emoji: '🐟', description: 'Pomfret fish in tangy Goan curry', image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300&h=200&fit=crop' },
+                    { name: 'Fish Koliwada', price: 239, emoji: '🍤', description: 'Mumbai street style crispy fish bites', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&h=200&fit=crop' },
+                    { name: 'Tuna Steak', price: 429, emoji: '🥩', description: 'Seared tuna steak with sesame crust', image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=300&h=200&fit=crop' },
+                    { name: 'Crab Curry', price: 389, emoji: '🦀', description: 'Fresh crab in spicy coconut masala', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop' },
+                    { name: 'Lobster Thermidor', price: 599, emoji: '🦞', description: 'Luxury lobster in creamy cheese sauce', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&h=200&fit=crop' },
+                    { name: 'Fish Tandoori', price: 319, emoji: '🔴', description: 'Clay oven roasted fish with tandoori spices', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=300&h=200&fit=crop' },
+                    { name: 'Prawn Biryani', price: 379, emoji: '🍚', description: 'Fragrant basmati rice with succulent prawns', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=300&h=200&fit=crop' },
+                    { name: 'Fish Malai Curry', price: 289, emoji: '🥥', description: 'Bengali style fish in coconut milk curry', image: 'https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=300&h=200&fit=crop' },
+                    { name: 'Squid Rings', price: 259, emoji: '🦑', description: 'Crispy battered squid rings with tartar sauce', image: 'https://images.unsplash.com/photo-1559847844-d721426d6edc?w=300&h=200&fit=crop' },
+                    { name: 'Fish Fingers', price: 199, emoji: '🐟', description: 'Crispy fish fingers perfect for kids', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=300&h=200&fit=crop' },
+                    { name: 'Mussels Curry', price: 329, emoji: '🐚', description: 'Fresh mussels in aromatic coconut curry', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop' }
+                ]
+            }
+        };
+
+        let currentSubCategory = '';
+        let currentCategoryType = '';
+
+        // Show category
+        function showCategory(category) {
+            hideAllPages();
+            currentCategoryType = category;
+            if (category === 'veg') {
+                document.getElementById('vegCategoryPage').classList.remove('hidden');
+            } else if (category === 'nonveg') {
+                document.getElementById('nonvegCategoryPage').classList.remove('hidden');
+            }
+        }
+
+        // Show sub category items
+        function showSubCategory(subCategory) {
+            hideAllPages();
+            currentSubCategory = subCategory;
+            const data = menuData[subCategory];
+            
+            document.getElementById('itemsPageTitle').textContent = data.title;
+            const itemsList = document.getElementById('itemsList');
+            itemsList.innerHTML = '';
+            
+            data.items.forEach((item, index) => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift';
+                itemCard.onclick = () => showItemDetails(item);
+                
+                itemCard.innerHTML = `
+                    <div class="flex items-center p-4">
+                        <div class="w-16 h-16 rounded-xl overflow-hidden mr-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl items-center justify-center hidden">
+                                <span class="text-2xl">${item.emoji}</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">${item.name}</h3>
+                            <p class="text-sm text-gray-600 mb-2">${item.description}</p>
+                            <div class="flex items-center justify-between">
+                                <div class="price-tag">₹${item.price}</div>
+                                <button onclick="event.stopPropagation(); addToCart('${item.name}', ${item.price}, '${item.emoji}')" class="bg-orange-500 text-white px-3 py-1 rounded-lg text-sm font-bold hover:bg-orange-600 transition duration-300">
+                                    Add +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                itemsList.appendChild(itemCard);
+            });
+            
+            document.getElementById('itemsPage').classList.remove('hidden');
+        }
+
+        // Show item details
+        function showItemDetails(item) {
+            hideAllPages();
+            
+            // Set item image with proper fallback
+            const itemImage = document.getElementById('itemImage');
+            const itemEmoji = document.getElementById('itemEmoji');
+            const emojiContainer = itemImage.nextElementSibling;
+            
+            if (item.image) {
+                itemImage.src = item.image;
+                itemImage.alt = item.name;
+                itemImage.style.display = 'block';
+                emojiContainer.style.display = 'none';
+            } else {
+                itemImage.style.display = 'none';
+                emojiContainer.style.display = 'flex';
+            }
+            
+            itemEmoji.textContent = item.emoji;
+            document.getElementById('itemName').textContent = item.name;
+            document.getElementById('itemDescription').textContent = item.description;
+            document.getElementById('itemPrice').textContent = item.price;
+            
+            // Store current item for cart operations
+            window.currentItem = item;
+            
+            document.getElementById('itemDetailsPage').classList.remove('hidden');
+        }
+
+        // Add to cart
+        function addToCart(name, price, emoji) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, emoji, quantity: 1 });
+            }
+            
+            updateCartBadge();
+            showNotification(`${name} added to cart!`);
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 fade-in';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // Show orders
+        function showOrders() {
+            hideAllPages();
+            document.getElementById('ordersPage').classList.remove('hidden');
+        }
+
+        // Show cart
+        function showCart() {
+            hideAllPages();
+            updateCartDisplay();
+            document.getElementById('cartPage').classList.remove('hidden');
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartSummary = document.getElementById('cartSummary');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '';
+                cartEmpty.classList.remove('hidden');
+                cartSummary.classList.add('hidden');
+            } else {
+                cartEmpty.classList.add('hidden');
+                cartSummary.classList.remove('hidden');
+                
+                cartItems.innerHTML = '';
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    total += item.price * item.quantity;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'bg-white rounded-xl shadow-lg p-4';
+                    cartItem.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">${item.emoji}</span>
+                                <div>
+                                    <h3 class="font-bold text-gray-800">${item.name}</h3>
+                                    <p class="text-orange-600 font-bold">₹${item.price}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="updateQuantity(${index}, -1)" class="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 transition duration-300">
+                                    -
+                                </button>
+                                <span class="font-bold text-lg">${item.quantity}</span>
+                                <button onclick="updateQuantity(${index}, 1)" class="bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-green-600 transition duration-300">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    cartItems.appendChild(cartItem);
+                });
+                
+                cartTotal.textContent = `₹${total}`;
+            }
+        }
+
+        // Update quantity
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            updateCartBadge();
+            updateCartDisplay();
+        }
+
+        // Navigation functions
+        function goBackToCategory() {
+            hideAllPages();
+            if (currentCategoryType === 'veg') {
+                document.getElementById('vegCategoryPage').classList.remove('hidden');
+            } else if (currentCategoryType === 'nonveg') {
+                document.getElementById('nonvegCategoryPage').classList.remove('hidden');
+            }
+        }
+
+        function goBackToItems() {
+            hideAllPages();
+            document.getElementById('itemsPage').classList.remove('hidden');
+        }
+
+        // Show search page
+        function showSearch() {
+            hideAllPages();
+            document.getElementById('searchPage').classList.remove('hidden');
+            document.getElementById('searchInput').focus();
+        }
+
+        // Perform search
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const searchResults = document.getElementById('searchResults');
+            
+            if (searchTerm === '') {
+                searchResults.innerHTML = `
+                    <div class="text-center py-12">
+                        <span class="text-6xl">🔍</span>
+                        <h3 class="text-xl font-bold text-gray-600 mt-4">Search for delicious food</h3>
+                        <p class="text-gray-500">Type in the search box to find your favorite dishes</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let results = [];
+            
+            // Search through all menu items
+            Object.keys(menuData).forEach(category => {
+                menuData[category].items.forEach(item => {
+                    if (item.name.toLowerCase().includes(searchTerm) || 
+                        item.description.toLowerCase().includes(searchTerm)) {
+                        results.push(item);
+                    }
+                });
+            });
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="text-center py-12">
+                        <span class="text-6xl">😔</span>
+                        <h3 class="text-xl font-bold text-gray-600 mt-4">No results found</h3>
+                        <p class="text-gray-500">Try searching for something else</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            searchResults.innerHTML = '';
+            results.forEach(item => {
+                const resultCard = document.createElement('div');
+                resultCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift';
+                resultCard.onclick = () => showItemDetails(item);
+                
+                resultCard.innerHTML = `
+                    <div class="flex items-center p-4">
+                        <div class="w-16 h-16 rounded-xl overflow-hidden mr-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl items-center justify-center hidden">
+                                <span class="text-2xl">${item.emoji}</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">${item.name}</h3>
+                            <p class="text-sm text-gray-600 mb-2">${item.description}</p>
+                            <div class="flex items-center justify-between">
+                                <div class="price-tag">₹${item.price}</div>
+                                <button onclick="event.stopPropagation(); addToCart('${item.name}', ${item.price}, '${item.emoji}')" class="bg-orange-500 text-white px-3 py-1 rounded-lg text-sm font-bold hover:bg-orange-600 transition duration-300">
+                                    Add +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                searchResults.appendChild(resultCard);
+            });
+        }
+
+        // Perform category search
+        function performCategorySearch() {
+            const searchTerm = document.getElementById('categorySearchInput').value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            
+            if (searchTerm === '') {
+                clearBtn.classList.add('hidden');
+                showAllCategories();
+                return;
+            }
+            
+            clearBtn.classList.remove('hidden');
+            
+            let results = [];
+            
+            // Search through all menu items
+            Object.keys(menuData).forEach(category => {
+                menuData[category].items.forEach(item => {
+                    if (item.name.toLowerCase().includes(searchTerm) || 
+                        item.description.toLowerCase().includes(searchTerm) ||
+                        category.toLowerCase().includes(searchTerm)) {
+                        results.push(item);
+                    }
+                });
+            });
+            
+            displaySearchResults(results, searchTerm);
+        }
+
+        // Clear category search
+        function clearCategorySearch() {
+            document.getElementById('categorySearchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            showAllCategories();
+        }
+
+        // Display search results in categories page
+        function displaySearchResults(results, searchTerm) {
+            const categoriesContainer = document.querySelector('#categoriesPage .grid');
+            
+            if (results.length === 0) {
+                categoriesContainer.innerHTML = `
+                    <div class="col-span-1 text-center py-12">
+                        <span class="text-6xl">😔</span>
+                        <h3 class="text-xl font-bold text-gray-600 mt-4">No results found</h3>
+                        <p class="text-gray-500">Try searching for "${searchTerm}" in a different way</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            categoriesContainer.innerHTML = `
+                <div class="col-span-1 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Search Results for "${searchTerm}" (${results.length} items)</h3>
+                </div>
+            `;
+            
+            results.forEach(item => {
+                const resultCard = document.createElement('div');
+                resultCard.className = 'category-card rounded-xl shadow-lg overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing';
+                resultCard.onclick = () => showItemDetails(item);
+                
+                resultCard.innerHTML = `
+                    <div class="flex items-center p-4">
+                        <div class="w-16 h-16 rounded-xl overflow-hidden mr-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl items-center justify-center hidden">
+                                <span class="text-2xl">${item.emoji}</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800 mb-1">${item.name}</h3>
+                            <p class="text-sm text-gray-600 mb-2">${item.description}</p>
+                            <div class="flex items-center justify-between">
+                                <div class="price-tag">₹${item.price}</div>
+                                <button onclick="event.stopPropagation(); addToCart('${item.name}', ${item.price}, '${item.emoji}')" class="bg-orange-500 text-white px-3 py-1 rounded-lg text-sm font-bold hover:bg-orange-600 transition duration-300">
+                                    Add +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                categoriesContainer.appendChild(resultCard);
+            });
+        }
+
+        // Show all categories (reset search)
+        function showAllCategories() {
+            const categoriesContainer = document.querySelector('#categoriesPage .grid');
+            categoriesContainer.innerHTML = `
+                <div onclick="showCategory('veg')" class="category-card rounded-3xl shadow-xl overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing">
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            🌱 Pure Veg
+                        </div>
+                    </div>
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" alt="Vegetarian Food" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-gradient-to-br from-green-100 to-green-200 items-center justify-center hidden">
+                            <div class="text-8xl">🥬</div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 via-green-900/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-3xl heading-primary mb-3 drop-shadow-lg">Vegetarian</h3>
+                            <p class="text-green-100 text-base text-body-primary">Fresh and healthy options</p>
+                            <div class="flex items-center mt-4 space-x-2">
+                                <span class="text-green-100 text-sm heading-secondary">Fresh & Healthy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-padding bg-gradient-to-r from-green-50 to-emerald-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-green-700 heading-secondary text-lg">🌱 Pure Veg Delights</span>
+                                <p class="text-green-600 text-body-primary text-sm mt-2">150+ Options</p>
+                            </div>
+                            <div class="bg-green-500 text-white p-3 rounded-full transform hover:rotate-12 transition duration-300 btn-rounded">
+                                <span class="text-lg">→</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div onclick="showCategory('nonveg')" class="category-card rounded-3xl shadow-xl overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing">
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            🍖 Premium
+                        </div>
+                    </div>
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&h=300&fit=crop" alt="Non-Vegetarian Food" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 items-center justify-center hidden">
+                            <div class="text-8xl">🍖</div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-orange-900/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-3xl heading-primary mb-3 drop-shadow-lg">Non-Vegetarian</h3>
+                            <p class="text-orange-100 text-base text-body-primary">Delicious meat & seafood</p>
+                            <div class="flex items-center mt-4 space-x-2">
+                                <span class="text-orange-100 text-sm heading-secondary">Premium Quality</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-padding bg-gradient-to-r from-orange-50 to-red-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-orange-700 heading-secondary text-lg">🍗 Premium Meat</span>
+                                <p class="text-orange-600 text-body-primary text-sm mt-2">120+ Dishes</p>
+                            </div>
+                            <div class="bg-orange-500 text-white p-3 rounded-full transform hover:rotate-12 transition duration-300 btn-rounded">
+                                <span class="text-lg">→</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div onclick="showSubCategory('cooldrinks')" class="category-card rounded-3xl shadow-xl overflow-hidden cursor-pointer hover-lift transition duration-500 fade-in relative card-spacing">
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            🥤 Refreshing
+                        </div>
+                    </div>
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=300&fit=crop" alt="Cool Drinks" class="w-full h-full object-cover" onerror="this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-200 items-center justify-center hidden">
+                            <div class="text-8xl">🥤</div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/80 via-cyan-900/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-3xl heading-primary mb-3 drop-shadow-lg">Cool Drinks</h3>
+                            <p class="text-cyan-100 text-base text-body-primary">Refreshing beverages & smoothies</p>
+                            <div class="flex items-center mt-4 space-x-2">
+                                <span class="text-cyan-100 text-sm heading-secondary">Refreshing & Cold</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gradient-to-r from-cyan-50 to-blue-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-cyan-700 heading-bold text-lg">🥤 Fresh Beverages</span>
+                                <p class="text-cyan-600 text-body text-sm mt-1">35+ Drinks</p>
+                            </div>
+                            <div class="bg-cyan-500 text-white p-3 rounded-full transform hover:rotate-12 transition duration-300">
+                                <span class="text-lg">→</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Hide all pages
+        function hideAllPages() {
+            const pages = ['categoriesPage', 'profilePage', 'vegCategoryPage', 'nonvegCategoryPage', 'itemsPage', 'itemDetailsPage', 'cartPage', 'ordersPage', 'paymentPage', 'orderSuccessPage', 'searchPage', 'thankYouPage'];
+            pages.forEach(page => {
+                document.getElementById(page).classList.add('hidden');
+            });
+        }
+
+        // Set active navigation
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('authPage').classList.remove('hidden');
+            showLogin();
+        }
+
+        // Add to cart from details page
+        function addToCartFromDetails() {
+            if (window.currentItem) {
+                addToCart(window.currentItem.name, window.currentItem.price, window.currentItem.emoji);
+            }
+        }
+
+        // Order now function
+        function orderNow() {
+            if (window.currentItem) {
+                addToCart(window.currentItem.name, window.currentItem.price, window.currentItem.emoji);
+                showCart();
+            }
+        }
+
+        // Proceed to payment
+        function proceedToPayment() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            showPayment();
+        }
+
+        // Show payment page
+        function showPayment() {
+            hideAllPages();
+            updatePaymentSummary();
+            document.getElementById('paymentPage').classList.remove('hidden');
+        }
+
+        // Update payment summary
+        function updatePaymentSummary() {
+            const paymentOrderItems = document.getElementById('paymentOrderItems');
+            const paymentSubtotal = document.getElementById('paymentSubtotal');
+            const paymentGst = document.getElementById('paymentGst');
+            const paymentTotal = document.getElementById('paymentTotal');
+            
+            paymentOrderItems.innerHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                
+                const orderItem = document.createElement('div');
+                orderItem.className = 'flex justify-between items-center';
+                orderItem.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <span class="text-lg">${item.emoji}</span>
+                        <span class="text-sm">${item.name} x${item.quantity}</span>
+                    </div>
+                    <span class="font-semibold">₹${item.price * item.quantity}</span>
+                `;
+                paymentOrderItems.appendChild(orderItem);
+            });
+            
+            const gst = Math.round(subtotal * 0.05);
+            const total = subtotal + gst;
+            
+            paymentSubtotal.textContent = `₹${subtotal}`;
+            paymentGst.textContent = `₹${gst}`;
+            paymentTotal.textContent = `₹${total}`;
+        }
+
+        // Payment method selection
+        let selectedPaymentMethod = '';
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Reset all payment methods
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('border-orange-500');
+                el.classList.add('border-gray-200');
+                const radio = el.querySelector('.payment-radio');
+                radio.classList.remove('bg-orange-500');
+                radio.innerHTML = '';
+            });
+            
+            // Highlight selected method
+            event.currentTarget.classList.remove('border-gray-200');
+            event.currentTarget.classList.add('border-orange-500');
+            const radio = event.currentTarget.querySelector('.payment-radio');
+            radio.classList.add('bg-orange-500');
+            radio.innerHTML = '<div class="w-2 h-2 bg-white rounded-full mx-auto"></div>';
+            
+            // Show/hide payment forms
+            document.querySelectorAll('#paymentDetailsForm > div').forEach(form => {
+                form.classList.add('hidden');
+            });
+            
+            document.getElementById('paymentDetailsForm').classList.remove('hidden');
+            
+            if (method === 'phonepe') {
+                document.getElementById('phonepeForm').classList.remove('hidden');
+            } else if (method === 'paytm') {
+                document.getElementById('paytmForm').classList.remove('hidden');
+            } else if (method === 'googlepay') {
+                document.getElementById('googlepayForm').classList.remove('hidden');
+            } else if (method === 'upi') {
+                document.getElementById('upiForm').classList.remove('hidden');
+            } else if (method === 'card') {
+                document.getElementById('cardForm').classList.remove('hidden');
+            } else if (method === 'netbanking') {
+                document.getElementById('netbankingForm').classList.remove('hidden');
+            } else if (method === 'cod') {
+                document.getElementById('codForm').classList.remove('hidden');
+            }
+            
+            // Enable place order button
+            document.getElementById('placeOrderBtn').disabled = false;
+        }
+
+        // Process payment
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                showNotification('Please select a payment method!');
+                return;
+            }
+            
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            
+            // Simulate payment processing
+            const placeOrderBtn = document.getElementById('placeOrderBtn');
+            placeOrderBtn.innerHTML = '⏳ Processing...';
+            placeOrderBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Generate order ID
+                const orderId = '#FH' + Math.floor(Math.random() * 9000 + 1000);
+                const total = document.getElementById('paymentTotal').textContent;
+                
+                // Add order to orders list
+                addOrderToHistory(orderId, cart, total);
+                
+                // Show success page first
+                showOrderSuccess(orderId, total);
+                
+                // Auto-redirect to rating page after 3 seconds
+                setTimeout(() => {
+                    showThankYou();
+                }, 3000);
+                
+                // Clear cart
+                cart = [];
+                updateCartBadge();
+                
+                // Reset payment form
+                selectedPaymentMethod = '';
+                document.getElementById('paymentDetailsForm').classList.add('hidden');
+                placeOrderBtn.innerHTML = '🚀 Place Order';
+                placeOrderBtn.disabled = true;
+                
+            }, 2000);
+        }
+
+        // Show order success page
+        function showOrderSuccess(orderId, total) {
+            hideAllPages();
+            document.getElementById('orderIdDisplay').textContent = orderId;
+            document.getElementById('totalPaidDisplay').textContent = total;
+            
+            // Display order item images
+            const orderItemsImages = document.getElementById('orderItemsImages');
+            orderItemsImages.innerHTML = '';
+            
+            cart.forEach(item => {
+                // Find the item details from menu data
+                let itemDetails = null;
+                Object.keys(menuData).forEach(category => {
+                    const foundItem = menuData[category].items.find(menuItem => menuItem.name === item.name);
+                    if (foundItem) {
+                        itemDetails = foundItem;
+                    }
+                });
+                
+                if (itemDetails) {
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'relative';
+                    imageContainer.innerHTML = `
+                        <div class="w-16 h-16 rounded-lg overflow-hidden border-2 border-orange-200">
+                            <img src="${itemDetails.image}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 items-center justify-center hidden">
+                                <span class="text-2xl">${item.emoji}</span>
+                            </div>
+                        </div>
+                        ${item.quantity > 1 ? `<div class="absolute -top-2 -right-2 bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">${item.quantity}</div>` : ''}
+                    `;
+                    orderItemsImages.appendChild(imageContainer);
+                }
+            });
+            
+            document.getElementById('orderSuccessPage').classList.remove('hidden');
+        }
+
+        // Add order to history
+        function addOrderToHistory(orderId, orderItems, total) {
+            const ordersList = document.getElementById('ordersList');
+            const orderCard = document.createElement('div');
+            orderCard.className = 'bg-white rounded-xl shadow-lg p-4';
+            
+            const itemsText = orderItems.map(item => `${item.emoji} ${item.name}`).join(', ');
+            const now = new Date();
+            const timeAgo = 'Just now';
+            
+            orderCard.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-bold text-gray-800">Order ${orderId}</span>
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-bold">Preparing</span>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">${itemsText}</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-orange-600 font-bold">${total}</span>
+                    <span class="text-xs text-gray-500">${timeAgo}</span>
+                </div>
+            `;
+            
+            ordersList.insertBefore(orderCard, ordersList.firstChild);
+        }
+
+        // Track order function
+        function trackOrder() {
+            showNotification('Order tracking feature coming soon!');
+        }
+
+        // Show thank you page
+        function showThankYou() {
+            hideAllPages();
+            document.getElementById('thankYouPage').classList.remove('hidden');
+            resetRating();
+        }
+
+        // Rating variables
+        let currentRating = 0;
+        let selectedQuickFeedback = [];
+
+        // Set rating
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.querySelectorAll('.rating-star');
+            const ratingText = document.getElementById('ratingText');
+            
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+            
+            const ratingMessages = [
+                'Please rate your experience',
+                'Poor - We\'ll do better next time',
+                'Fair - Room for improvement',
+                'Good - Thanks for your feedback',
+                'Very Good - We\'re glad you enjoyed!',
+                'Excellent - Thank you so much!'
+            ];
+            
+            ratingText.textContent = ratingMessages[rating];
+        }
+
+        // Reset rating
+        function resetRating() {
+            currentRating = 0;
+            selectedQuickFeedback = [];
+            
+            document.querySelectorAll('.rating-star').forEach(star => {
+                star.classList.remove('text-yellow-400');
+                star.classList.add('text-gray-300');
+            });
+            
+            document.getElementById('ratingText').textContent = 'Please rate your experience';
+            document.getElementById('feedbackText').value = '';
+            
+            document.querySelectorAll('.quick-feedback-btn').forEach(btn => {
+                btn.classList.remove('border-orange-500', 'bg-orange-50');
+                btn.classList.add('border-gray-200');
+            });
+        }
+
+        // Toggle quick feedback
+        function toggleQuickFeedback(button, feedback) {
+            const index = selectedQuickFeedback.indexOf(feedback);
+            
+            if (index > -1) {
+                selectedQuickFeedback.splice(index, 1);
+                button.classList.remove('border-orange-500', 'bg-orange-50');
+                button.classList.add('border-gray-200');
+            } else {
+                selectedQuickFeedback.push(feedback);
+                button.classList.remove('border-gray-200');
+                button.classList.add('border-orange-500', 'bg-orange-50');
+            }
+        }
+
+        // Submit feedback
+        function submitFeedback() {
+            if (currentRating === 0) {
+                showNotification('Please rate your experience first!');
+                return;
+            }
+            
+            const feedbackText = document.getElementById('feedbackText').value;
+            const now = new Date();
+            
+            // Store feedback in user profile
+            const feedback = {
+                id: Date.now(),
+                rating: currentRating,
+                comment: feedbackText,
+                quickFeedback: [...selectedQuickFeedback],
+                date: now.toLocaleDateString(),
+                time: now.toLocaleTimeString()
+            };
+            
+            userFeedbacks.unshift(feedback); // Add to beginning of array
+            
+            // Simulate feedback submission
+            showNotification('Thank you for your valuable feedback!');
+            
+            setTimeout(() => {
+                showCategories();
+            }, 2000);
+        }
+
+        // Show order success with proper navigation
+        function showOrderSuccess(orderId, total) {
+            hideAllPages();
+            if (orderId) document.getElementById('orderIdDisplay').textContent = orderId;
+            if (total) document.getElementById('totalPaidDisplay').textContent = total;
+            document.getElementById('orderSuccessPage').classList.remove('hidden');
+        }
+
+        // Toggle feedback section in profile
+        function toggleFeedbackSection() {
+            const feedbacksList = document.getElementById('feedbacksList');
+            const feedbackToggle = document.getElementById('feedbackToggle');
+            
+            if (feedbacksList.classList.contains('hidden')) {
+                feedbacksList.classList.remove('hidden');
+                feedbackToggle.textContent = '↓';
+                updateFeedbackDisplay();
+            } else {
+                feedbacksList.classList.add('hidden');
+                feedbackToggle.textContent = '→';
+            }
+        }
+
+        // Update feedback display in profile
+        function updateFeedbackDisplay() {
+            const feedbacksList = document.getElementById('feedbacksList');
+            const feedbackCount = document.getElementById('feedbackCount');
+            const noFeedbacks = document.getElementById('noFeedbacks');
+            
+            feedbackCount.textContent = `${userFeedbacks.length} feedback${userFeedbacks.length !== 1 ? 's' : ''} given`;
+            
+            if (userFeedbacks.length === 0) {
+                noFeedbacks.style.display = 'block';
+                return;
+            }
+            
+            noFeedbacks.style.display = 'none';
+            
+            // Clear existing feedback items (except noFeedbacks)
+            const existingItems = feedbacksList.querySelectorAll('.feedback-item');
+            existingItems.forEach(item => item.remove());
+            
+            userFeedbacks.forEach(feedback => {
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'feedback-item bg-gray-50 rounded-lg p-3 border border-gray-200';
+                
+                const stars = '⭐'.repeat(feedback.rating);
+                const quickFeedbackText = feedback.quickFeedback.length > 0 ? 
+                    `<div class="flex flex-wrap gap-1 mt-2">
+                        ${feedback.quickFeedback.map(tag => `<span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full text-xs">${tag}</span>`).join('')}
+                    </div>` : '';
+                
+                feedbackItem.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="text-lg">${stars}</div>
+                        <div class="text-xs text-gray-500">${feedback.date}</div>
+                    </div>
+                    ${feedback.comment ? `<p class="text-sm text-gray-700 mb-2">"${feedback.comment}"</p>` : ''}
+                    ${quickFeedbackText}
+                `;
+                
+                feedbacksList.appendChild(feedbackItem);
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'990133e491c8087b',t:'MTc2MDcxODg1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
